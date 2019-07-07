@@ -1,2 +1,2 @@
 # 23andMe_missing_data_summary
-I am performing analysis of my 23andme genomic data. This is a work in progress.
+I am performing analysis of my 23andme genomic data. This is a work in progress. I have provided a sample gtf file, which I created from the complete gtf file using the subsample script also provided. I'm not using the subsampled gtf in my analysis but have provided it because I was not able to upload the entire thing to this page. In the future I'll post a link where the entire GTF file can be downloaded.
