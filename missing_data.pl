@@ -1,18 +1,16 @@
 #!/usr/bin/perl
 use strict;
 use Math::Round;
-use Data::Dumper;
-######################
+#########
+#Description: Takes as input raw 23andme data file, and computes statistics regarding per chromosome SNP statistics and missing data statistics.
+#Usage : perl missing_data.pl 23andme_rawdata_file.txt
+#####################
+#######################
 my $snps = $ARGV[0];
 my $missing_count = 0;
 my $total_count = 0;
 my %missing_by_chr;
-
-###
-#TO DO:
-# What is the correlation between gene density and marker density?
-# 
-#
+################
 #####################################
 # Internal Dictionary of variables  #
 #####################################
@@ -96,12 +94,12 @@ open(my $fh2, '>', "./data.summary.txt");
 print $fh2 "Chromosome\tRange\tSNPs\tSNP_density\tMissing\t%_missing\tMissing_density\n";
 foreach(sort { $a <=> $b } keys(%missing_by_chr)) {
 	unless($_ =~ m/[A-Z]|last|sum|density/) {
-	print $fh2 "$_\t$missing_by_chr{$_}[4]\t$missing_by_chr{$_}[0]\t" . ($missing_by_chr{$_}[0] / $missing_by_chr{$_}[4]) * 100 . "\t$missing_by_chr{$_}[1]\t" . nearest(0.01, ($missing_by_chr{$_}[1] / $missing_by_chr{$_}[0]) * 100) . "%\t" . ($missing_by_chr{$_}[1] / $missing_by_chr{$_}[4]) . "\n";
+	print $fh2 "$_\t$missing_by_chr{$_}[4]\t$missing_by_chr{$_}[0]\t" . ($missing_by_chr{$_}[0] / $missing_by_chr{$_}[4]) . "\t$missing_by_chr{$_}[1]\t" . nearest(0.01, ($missing_by_chr{$_}[1] / $missing_by_chr{$_}[0]) * 100) . "%\t" . ($missing_by_chr{$_}[1] / $missing_by_chr{$_}[4]) . "\n";
 	}
 }
 foreach (sort { $a cmp $b } keys(%missing_by_chr)) {
 	unless($_ =~ m/[1-9]|last|sum|density/) {
-	print $fh2 "$_\t$missing_by_chr{$_}[4]\t$missing_by_chr{$_}[0]\t" . ($missing_by_chr{$_}[0] / $missing_by_chr{$_}[4]) * 100 . "\t$missing_by_chr{$_}[1]\t" . nearest(0.01    , ($missing_by_chr{$_}[1] / $missing_by_chr{$_}[0]) * 100) . "%\t" . ($missing_by_chr{$_}[1] / $missing_by_chr{$_}[4]) . "\n";
+	print $fh2 "$_\t$missing_by_chr{$_}[4]\t$missing_by_chr{$_}[0]\t" . ($missing_by_chr{$_}[0] / $missing_by_chr{$_}[4]) . "\t$missing_by_chr{$_}[1]\t" . nearest(0.01    , ($missing_by_chr{$_}[1] / $missing_by_chr{$_}[0]) * 100) . "%\t" . ($missing_by_chr{$_}[1] / $missing_by_chr{$_}[4]) . "\n";
 	}
 }
 close $fh2;
