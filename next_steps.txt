@@ -1,0 +1,63 @@
+
+Ask Dave if you can get back into your beocat account...
+	-Did. He said to contact IT to reset password
+	-Did this. Waiting on a response now.
+	-Got response. Just need to use skype or zoom or video call somehow to confirm my identity. Will do so on Monday.
+
+1) write a script taking as input the new bin ranges and the 23andMe SNP file, and outputs the SNPs in terms of the chromosomal ranges.
+	-Done
+	-Done, have warnings on, and avoided use of sort. 
+2) This will be used as input to the missing_data_ranges.pl script, which will calculate the missing data statistics for these ranges.
+	-Need to update this to work, likely just a needs a little tweaking
+	-Did the update, outputting the stats for the bins. Need to figure out where the bin "last is coming from, and get rid of it, and then update the sorting method so that it sorts the bins in order. Also need to change the way that I sort so that it doesn't violate warnings.
+	-took care of the last problem, updated so that you aren't missing the last snp on the chromosome, and ordered by input order such that we don't need a sort and I can use warnings. missing_data_ranges.pl is finished.
+
+3) Output of Missing Data followed by gene density for each range (calculated by get_gene_density.pl) will be compiled in the data.summary.txt file. 
+	-need to update this script so that it calculates the density correctly.
+
+Calculate correlation between gene density (considering each subclass as well) and missing data as well as homozygous data
+Calculate correlations between homozygous data and missing data
+
+Four possible methods of binning:
+-Tolerate overlap in the last corner bin but use lowest overlap percentage
+-Take the overlap, and divide it between all of the bins, such that each bin has an equal amount of overlap
+-perform sliding window binning approach
+-Tolerate a certain % difference in bin size between chromosomes, such that overlap is minimized. Both chrom 1 and 2 have 0.05% overlap, chr 1 bin size of 200Kb, while chromosome 2 has bin size of 195kb...
+What examples in the literature demonstrate a sound means of binning? 
+
+- Or, simply expand the range out past the last SNP, as long as the bin is still within the chromosome. Easiest solution.
+- Did this. There's still some overlap, unfortunately...
+
+Next consider directely into what group each SNP falls, by exact position
+Further specify the groups in terms of what PART of the gene it falls into, i.e. exon, etc
+
+Make tables summarizing this information.
+
+Statistical test to determine the randomness of the assayed SNPs genome wide 
+Statistical test to determine the randomness of the missing data genome wide
+Statistical test to determine the randomness of homozygous data genome wide
+
+Notes on correct calculation of gene density:
+-Since the genes are of different size, it seems incorrect to simply count the number of genes and then just divide by the number of basepairs. You could have a lot of very small genes in a range, making the range sparse, but by this metric, the density would seem high compared to a range that was populated by many very long genes.
+-A better method might be to divide the basepairs occpied by genes by the total basepairs in the range, to get the coding density.
+
+To update:
+-Correct possible misscalculation of the gene density (20x / 7x - did I divide by the right number?)
+-Re-do format of the box under table two to make it more clear
+-Add numbers to the Cook's D test that you ran
+
+
+To do, July 31st:
+-Debug the SNP binner script
+	-The one in the separate folder looks good to go, write a checker script though, and add the blinking elipses...
+-Debug the missing_ranged.pl script, there's one or two oddities still. For instance, the MT density calculations are /by bin_size.
+-Get correct gene density from the GTF file
+-Find the correct GTF file
+
+
+Notes August 1st:
+Rather than going through and converting all of the genes chromosomes to the bin coordinates, I am going through and doing the conversion in the density script.
+
+
+
+

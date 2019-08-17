@@ -1,0 +1,10 @@
+
+This is the general flow of the analysis:
+
+	1) Generate a bedfile of the assayed ranges in the 23andme dataset using missing_data.pl
+	2) On this basis, create a binned bedfile. Experiment with different binsizes, if necessary, 
+		in order to minimize the overlap of the last bin. Use the overlap output file to do so.
+	3) Bin the 23andMe SNP file using the SNP_binner.pl script using the same bin size.
+	4) Use the missing_data_binned.pl script to output the SNPs and SNPs missing data to data.summary.txt
+	5) Use the get_gene_density.pl to output the gene density statistics to the data.summary.txt file
+	6) Run analysis of correlation and PCA (if appropriate) in R.
