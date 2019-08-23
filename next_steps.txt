@@ -1,8 +1,4 @@
 
-Ask Dave if you can get back into your beocat account...
-	-Did. He said to contact IT to reset password
-	-Did this. Waiting on a response now.
-	-Got response. Just need to use skype or zoom or video call somehow to confirm my identity. Will do so on Monday.
 
 1) write a script taking as input the new bin ranges and the 23andMe SNP file, and outputs the SNPs in terms of the chromosomal ranges.
 	-Done
@@ -58,6 +54,17 @@ To do, July 31st:
 Notes August 1st:
 Rather than going through and converting all of the genes chromosomes to the bin coordinates, I am going through and doing the conversion in the density script.
 
+To do August 21st:
+-Synthetic data generator works well with bins, and testing shows get_gene_density.pl works with non-overlapping genes which do not intersect with the bins. Going to add the option to generate bin-intersecting genes at half of the bins now.
 
+-It seems that there is something wrong about the way that you are counting genes that intersect with bins. Not completely wrong, it would seem, because the majority of bins are still calculated correctly in the presence of intersecting genes.
+
+-I would like to know how to add flags to perl scripts more formally.
+-I would like to know what the best strategy to writing code with different running modes would be. 
+
+August 22nd:
+get_gene_density.pl calculates the correct output for non-overlapping genes with 4/5ths of the bins featuring bin-intersecting genes. The synthetic data generator can generate these types of gtfs correctly and the testing pipeline works with this for both bedfiles check and predetermined check. 
+
+-Next step is to calculate intersecting genes.
 
 

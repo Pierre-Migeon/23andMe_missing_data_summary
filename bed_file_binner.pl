@@ -29,9 +29,7 @@ my $bin_size = $ARGV[0];
 my $start;
 my $end;
 my %newranges;
-my $av_overlap;
 my @chromosomes;
-my %chr_ends;
 #######################
 #Read in the chromosome lengths file
 ####################################
@@ -40,36 +38,20 @@ while (<T_LEN>) {
 	unless ($_ =~ m/^#/) {
 		chomp;
 		my @line = split(/\t/, $_);
-		$chr_ends{$line[0]} = $line[1];
+		push @chromosomes, $line[0];
+		#Define the start and end of the assayed range
+                $start = 0;
+                $end = $line[1];
+                bin_chr ($start, $end, $line[0], \%newranges);
 	}
 }
 close (T_LEN);
 
-########################
-#Open and expand the ranges per expansion rules
-################################################
-open(BED, '<', "./ranges.bed");
-while(<BED>) {
-	unless( $_ =~ m/^#/ ) {
-		chomp;
-		my @line = split(/\t/, $_);
-		push @chromosomes, $line[0];
-		#Define the start and end of the assayed range
-		$start = 0;
-		$end = $chr_ends{$line[0]};
-		bin_chr ($start, $end, $line[0], \%newranges);
-	}
-}
-close(BED);
-
-###############################################
-### Output the new ranges to a new BED file ###
-###############################################
-#open out range file and print header
-#####################################
+######################################
+#open out range file and print header#
+######################################
 open( my $fh, '>', "./ranges.bed" );
 print $fh "#Chromosome\tstart\tend\n";
-
 
 #Open overlaps file for writing and print header
 ################################################
@@ -95,16 +77,15 @@ foreach (@chromosomes) {
 close( $fh );
 #close( $fh2 );
 
-########################################################################################
-# subroutine to bin the chromosomes according to the shifted start and end coordinates #
-########################################################################################
+############################################################################
+# subroutine to bin the chromosomes according to start and end coordinates #
+############################################################################
 sub bin_chr {
 	my $start = shift;
 	my $end = shift;
 	my $chr = shift;
 	my $newranges = shift;
 	my $i = 0;
-	my $backtrack;
 
 	while ($start < $end) {
 		unless ($start == 0) {
@@ -122,6 +103,8 @@ sub bin_chr {
 	}
 }
 
+
+############################################################################################################
 #Deprecated Subroutine Cemetery (THE DSC)
 #(i.e., none of these subroutines are any longer in play, 
 # but are memorialized here nonetheless)

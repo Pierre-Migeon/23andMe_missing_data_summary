@@ -56,10 +56,13 @@ while (<IN>) {
 						#extract the gene type information
 						@name = split(/;/, $line2[8]);
 						$name[@name - 2] =~ s/.*"(.*)".*/$1/;
-						if ($switch == 0 && defined($gene_ranges{$line2[0]}{'count'}) && @{$gene_ranges{$line2[0]}{'count'}} + 0 > 0 && defined($gene_ranges{$line2[0]}{$name[@name - 2]}) && @{$gene_ranges{$line2[0]}{$name[@name - 2]}} + 0 > 0) {
-							$overlap_gene = $gene_ranges{$line2[0]}{'count'}[@{$gene_ranges{$line2[0]}{'count'}} - 1];
-							$overlap_specific = $gene_ranges{$line2[0]}{$name[@name - 2]}[@{$gene_ranges{$line2[0]}{$name[@name - 2]}} - 1];
-						}
+                                                if ($switch == 0 && defined($gene_ranges{$line2[0]}{'count'}) && @{$gene_ranges{$line2[0]}{'count'}} + 0 > 0) {
+                                                        $overlap_gene = $gene_ranges{$line2[0]}{'count'}[@{$gene_ranges{$line2[0]}{'count'}} - 1];
+                                                }
+                                                if ($switch == 0 && defined($gene_ranges{$line2[0]}{$name[@name - 2]}) && @{$gene_ranges{$line2[0]}{$name[@name - 2]}} + 0 > 0) {
+                                                        $overlap_specific = $gene_ranges{$line2[0]}{$name[@name - 2]}[@{$gene_ranges{$line2[0]}{$name[@name - 2]}} - 1];
+                                                }
+			
 						#overall gene basepairs:
 						$stats{$line2[0]}{$_}{'count'} += in_bin_count($line2[3], $line2[4], $stats{$line2[0]}{$_}{'start'}, $stats{$line2[0]}{$_}{'end'},  $overlap_gene, \@{$gene_ranges{$line2[0]}{'count'}});
 						#Store the basepairs occupied for that specific gene type:
@@ -123,6 +126,10 @@ while(<DATAFILE>) {
 		@header = split(/\t/, $_);
 	} else	{
 		my @line3 = split('\t', $_);
+		#in the case that we only have one bin per chromosome, set to zero
+		if(!defined($max_bin{$last_bin})) {
+			$max_bin{$last_bin} = 0;
+		}
 		unless (suffix($line3[0]) == 0) {
 			$max_bin{$last_bin} = suffix($line3[0]);
 		}
@@ -242,7 +249,7 @@ sub in_bin_count {
 				@coordinates = sort {$a <=> $b} @coordinates;
 				#if the end of the prior genic range ends before the end of the current gene ends
 				if ($gene_ranges->[$x + 1] < $Gend && $gene_ranges->[$x + 1] < $Bend) {
-					$overlapping = $coordinates[4] - $coordinates[3] + 1;
+					$overlapping = $coordinates[4] - $coordinates[3];
 				#in the case for which the past genic range completely covers the current gene or extends past the bin end
 				} else {
 					$overlapping = 0;
