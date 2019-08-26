@@ -21,7 +21,6 @@ while(<BED>) {
 		($base_chr) = $line[0] =~ /([0-9A-Z]+)/;
 		${$ranges{$base_chr}{$line[0]}}[0] = $line[1];
 		${$ranges{$base_chr}{$line[0]}}[1] = $line[2];
-		${$ranges{$base_chr}{'last_bin'}}[0] = $line[0];
 	}
 }
 close(BED);
@@ -41,7 +40,7 @@ while(<SNP>) {
 	$line[1] = find_bin($line[2], %{$ranges{$line[1]}});
 	print $fh join("\t", @line) . "\n";
 	}
-}	
+}
 
 print "Done!\n";
 
@@ -50,13 +49,8 @@ sub find_bin {
 	my ($coordinate) = shift;
 	my %startend = @_;
 	foreach (keys %startend) {
-		if ($coordinate == ${$startend{${$startend{'last_bin'}}[0]}}[1]) {
-			return (${$startend{'last_bin'}}[0]);
+		if (${$startend{$_}}[0] < $coordinate && ${$startend{$_}}[1] >= $coordinate) {
+			return ($_);
 		}
-		unless ($_ =~ m/last/) {
-			if (${$startend{$_}}[0] <= $coordinate && ${$startend{$_}}[1] > $coordinate) {
-				return ($_);
-			}
-		}
-	}	
+	}
 }

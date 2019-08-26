@@ -1,0 +1,6 @@
+2	RefSeq	gene	212240442	213403352	.	-	.	ID=gene5635;Name=ERBB4;Dbxref=GeneID:2066,HGNC:3432,MIM:600543;description=v-erb-a erythroblastic leukemia viral oncogene homolog 4 %28avian%29;gbkey=Gene;gene=ERBB4;gene_synonym=HER4,p180erbB4
+2	RefSeq	gene	213290987	213291084	.	-	.	ID=gene5637;Name=MIR548F2;Dbxref=GeneID:100313771,HGNC:35306,miRBase:MI0006375;description=microRNA 548f-2;gbkey=Gene;gene=MIR548F2;gene_synonym=hsa-mir-548f-2,MIR548F-2,MIRN548F2
+2	RefSeq	gene	213696885	213697649	.	+	.	ID=gene5638;Name=PCED1CP;Dbxref=GeneID:646249,HGNC:44083;description=PC-esterase domain containing 1C%2C pseudogene;gbkey=Gene;gene=PCED1CP;pseudo=true
+2	RefSeq	gene	213790981	213791060	.	+	.	ID=gene5639;Name=MIR4776-1;Dbxref=GeneID:100616267,HGNC:41641,miRBase:MI0017419;description=microRNA 4776-1;gbkey=Gene;gene=MIR4776-1
+2	RefSeq	gene	213790981	213791060	.	-	.	ID=gene5640;Name=MIR4776-2;Dbxref=GeneID:100616472,HGNC:41631,miRBase:MI0017420;description=microRNA 4776-2;gbkey=Gene;gene=MIR4776-2
+2	RefSeq	gene	213864408	214016333	.	-	.	ID=gene5641;Name=IKZF2;Dbxref=GeneID:22807,HGNC:13177,MIM:606234;description=IKAROS family zinc finger 2 %28Helios%29;gbkey=Gene;gene=IKZF2;gene_synonym=ANF1A2,HELIOS,ZNF1A2,ZNFN1A2

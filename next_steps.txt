@@ -42,7 +42,6 @@ To update:
 -Re-do format of the box under table two to make it more clear
 -Add numbers to the Cook's D test that you ran
 
-
 To do, July 31st:
 -Debug the SNP binner script
 	-The one in the separate folder looks good to go, write a checker script though, and add the blinking elipses...
@@ -67,4 +66,28 @@ get_gene_density.pl calculates the correct output for non-overlapping genes with
 
 -Next step is to calculate intersecting genes.
 
+August 25th:
+-Completed all testing. Looks good on both synthetic data tests and with bedtools test. Synthetic data test outputs all possible levels of difficulty now (see script for details of what this means). The problem was duplicate entries in the gff/gtf, and possibly lack of consideration for 0 vs 1 indexed ranges.
+-Updated bedfile format to use 0 indexed ranges and made sure that this was considered appropriately in all of the scripts 
+-Cleaned up directory and began writing script to pipeline together the analysis.
+To do: 
+	Add the spinner effect to the code while it's running
+	Add option to print out usage statment to scripts, and learn how to input parameters to a script without using ARGV[]
+
+
+Analysis of SNPs from 23andMe data:
+	Three main goals:
+
+	1)
+	Want to graph the frequency of sites that fall within certain groups, for instance UTR, exon, intron, annotation
+	Need to annotate the SNP file for this purpose. Also, identify more precisely what categories the genes fall into (I like the categories include in the GTF, could add the annotations to the GFF file based on using BLAST to ID the genes.
+
+	2)
+	Want to test for random distribution of the genes throughout the genome using statistical test
+
+	3)
+	Compare your data to your own. To do this, need to download a bunch of public data.
+		a) Webcrawler idea to locate and download 23andMe files
+		b) You can compare the rareness of your own SNPs as compared to the other data
+		c) Think about population genetics analysis that you can perform on this data.
 

@@ -88,9 +88,6 @@ sub bin_chr {
 	my $i = 0;
 
 	while ($start < $end) {
-		unless ($start == 0) {
-			$start++;
-		}
 		push @{$newranges{$chr}}, $i, $start;
 		if ( $start + $bin_size > $end ) {
 			push @{$newranges{$chr}}, $end;

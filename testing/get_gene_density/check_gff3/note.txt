@@ -1,0 +1,1 @@
+I completed testing on Sunday, August 25th. The problem was duplicate gene entries in the data, which was wreaking havoc on my algorithm. Code now correctly calculates gene density per bin, using a modified GFF3 file as input.

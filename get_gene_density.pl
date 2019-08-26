@@ -56,13 +56,12 @@ while (<IN>) {
 						#extract the gene type information
 						@name = split(/;/, $line2[8]);
 						$name[@name - 2] =~ s/.*"(.*)".*/$1/;
-                                                if ($switch == 0 && defined($gene_ranges{$line2[0]}{'count'}) && @{$gene_ranges{$line2[0]}{'count'}} + 0 > 0) {
-                                                        $overlap_gene = $gene_ranges{$line2[0]}{'count'}[@{$gene_ranges{$line2[0]}{'count'}} - 1];
-                                                }
-                                                if ($switch == 0 && defined($gene_ranges{$line2[0]}{$name[@name - 2]}) && @{$gene_ranges{$line2[0]}{$name[@name - 2]}} + 0 > 0) {
-                                                        $overlap_specific = $gene_ranges{$line2[0]}{$name[@name - 2]}[@{$gene_ranges{$line2[0]}{$name[@name - 2]}} - 1];
-                                                }
-			
+            if ($switch == 0 && defined($gene_ranges{$line2[0]}{'count'}) && @{$gene_ranges{$line2[0]}{'count'}} + 0 > 0) {
+            	$overlap_gene = $gene_ranges{$line2[0]}{'count'}[@{$gene_ranges{$line2[0]}{'count'}} - 1];
+            }
+            if ($switch == 0 && defined($gene_ranges{$line2[0]}{$name[@name - 2]}) && @{$gene_ranges{$line2[0]}{$name[@name - 2]}} + 0 > 0) {
+            	$overlap_specific = $gene_ranges{$line2[0]}{$name[@name - 2]}[@{$gene_ranges{$line2[0]}{$name[@name - 2]}} - 1];
+            }
 						#overall gene basepairs:
 						$stats{$line2[0]}{$_}{'count'} += in_bin_count($line2[3], $line2[4], $stats{$line2[0]}{$_}{'start'}, $stats{$line2[0]}{$_}{'end'},  $overlap_gene, \@{$gene_ranges{$line2[0]}{'count'}});
 						#Store the basepairs occupied for that specific gene type:
